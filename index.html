@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قعدتنا | نقترح لك جوك!</title>
+    <link rel="icon" href="1.png" type="image/png">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Tajawal', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #28a745;
+        }
+        
+        .hero {
+            padding: 80px 0;
+            text-align: center;
+            background-color: #e9f7ef;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            color: #28a745;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #555;
+        }
+        
+        section {
+            padding: 60px 0;
+        }
+        
+        section h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #28a745;
+            text-align: center;
+        }
+        
+        .about-service {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: right;
+            margin-bottom: 40px;
+        }
+        
+        .about-service p {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        /* ===== بداية أنماط الأماكن المقترحة ===== */
+        .places-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .place-card {
+            width: 350px;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        
+        .place-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .place-image {
+            height: 250px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .place-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .place-card:hover .place-image img {
+            transform: scale(1.1);
+        }
+        
+        .place-category {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: #28a745;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+            z-index: 1;
+        }
+        
+        .place-info {
+            padding: 20px;
+        }
+        
+        .place-info h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: #28a745;
+        }
+        
+        .place-info p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .place-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+        }
+        
+        .place-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .place-rating span {
+            color: #f8b400;
+            font-size: 18px;
+        }
+        
+        .place-location {
+            color: #666;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .place-button {
+            display: inline-block;
+            background-color: #28a745;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+        
+        .place-button:hover {
+            background-color: #218838;
+        }
+        /* ===== نهاية أنماط الأماكن المقترحة ===== */
+        
+        .team {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .team-member {
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            width: 350px;
+            transition: transform 0.3s;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+        
+        .team-member img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .team-member-info {
+            padding: 20px;
+        }
+        
+        .team-member-info h3 {
+            font-size: 20px;
+            margin-bottom: 5px;
+            color: #28a745;
+        }
+        
+        .team-member-info h4 {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+        
+        .team-member-info p {
+            font-size: 16px;
+            color: #555;
+        }
+        
+        .contact {
+            background-color: #e9f7ef;
+            padding: 60px 0;
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .contact-info p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: 'Tajawal', sans-serif;
+            font-size: 16px;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #218838;
+        }
+        
+        .whatsapp-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background-color: #25D366;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 500;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        .whatsapp-button:hover {
+            background-color: #128C7E;
+        }
+        
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background-color: #fff;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+                text-align: center;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .menu-toggle {
+                display: block;
+                font-size: 24px;
+                cursor: pointer;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            section {
+                padding: 40px 0;
+            }
+            
+            .about-service {
+                padding: 20px;
+            }
+            
+            .team-member, .place-card {
+                width: 100%;
+            }
+        }
+        
+        /* إضافة أيقونة القائمة للشاشات الصغيرة */
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #28a745;
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo" style="display: inline-block; vertical-align: middle;">
+    <img src="1.png" alt="logoheader" style="width: 100%; max-width: 60px; height: auto; display: block;">
+  </a>
+                <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+                <div class="nav-links" id="navLinks">
+                    <a href="#about-service">وش نقدم؟</a>
+                    <a href="#recommended-places">أماكن مقترحة</a>
+                    <a href="#team">فريقنا</a>
+                    <a href="#contact">تواصل معنا</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <img src="2.png" alt="logo" style="width: 100%; max-width: 200px; height: auto;">
+            <p>نقترح لك جوك! ما تدري وين تطلع؟ عطنا ذوقك، ونقترح لك أماكن قعدات وطلعات تناسب مزاجك، من مطلات هادية إلى كافيهات دافئة… وكلها بلمسة شخصية.</p>
+        </div>
+    </section>
+
+    <section id="about-service">
+        <div class="container">
+            <h2>وش تقدم "قعدتنا"؟</h2>
+            <div class="about-service">
+                <p>"قعدتنا" هي خدمة بسيطة تقترح لك أماكن تناسب طلعتك.</p>
+                <p>جاوبنا على كم سؤال عن وقتك، عددكم، ونوع القعدة اللي تبغاها، وإحنا نختار لك مكان يناسبك.</p>
+                <p>تقدر تعتمد على توصياتنا الجاهزة، أو تطلب توصية مخصصة لك عبر واتساب.</p>
+                <p>الخدمة متوفرة حاليًا للمناطق الرئيسية في السعودية، ونحدثها بشكل مستمر.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم الأماكن المقترحة الجديد -->
+    <section id="recommended-places">
+        <div class="container">
+            <h2>أماكن نقترحها لك</h2>
+            <div class="places-container">
+                <div class="place-card">
+                    <div class="place-category">كافيه</div>
+                    <div class="place-image">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 350 250'><rect width='350' height='250' fill='%23795548'/><path d='M0 100 Q 175 150, 350 100 L 350 250 L 0 250 Z' fill='%23e9f7ef'/><circle cx='250' cy='70' r='30' fill='%23fff9c4'/><circle cx='80' cy='50' r='5' fill='%23fff'/><circle cx='125' cy='80' r='3' fill='%23fff'/><circle cx='180' cy='30' r='4' fill='%23fff'/><rect x='100' y='170' width='150' height='80' rx='10' fill='%23A1887F'/><rect x='120' y='150' width='110' height='25' rx='5' fill='%23BCAAA4'/><ellipse cx='175' cy='200' rx='50' ry='20' fill='%23D7CCC8'/></svg>" alt="كافيه السكينة">
+                    </div>
+                    <div class="place-info">
+                        <h3>كافيه السكينة</h3>
+                        <p>مكان هادئ يتميز بإطلالة رائعة على البحيرة، يقدم أشهى المشروبات والمخبوزات الطازجة. مثالي للجلسات الهادئة والعمل.</p>
+                        <div class="place-details">
+                            <div class="place-rating">
+                                <span>★★★★★</span>
+                                <p>4.8</p>
+                            </div>
+                            <div class="place-location">
+                                <span>📍</span>
+                                <p>الرياض، حي الياسمين</p>
+                            </div>
+                        </div>
+                        <a href="#contact" class="place-button">استفسر أكثر</a>
+                    </div>
+                </div>
+
+                <div class="place-card">
+                    <div class="place-category">مطلات</div>
+                    <div class="place-image">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 350 250'><rect width='350' height='250' fill='%2381C784'/><path d='M0 80 L 50 70 L 100 80 L 150 60 L 200 90 L 250 50 L 300 70 L 350 60 L 350 250 L 0 250 Z' fill='%233E2723'/><circle cx='280' cy='40' r='30' fill='%23FFC107'/><rect x='50' y='160' width='250' height='90' rx='5' fill='%236D4C41'/><rect x='75' y='140' width='200' height='25' fill='%238D6E63'/><rect x='70' y='180' width='40' height='40' fill='%23D7CCC8'/><rect x='130' y='180' width='40' height='40' fill='%23D7CCC8'/><rect x='190' y='180' width='40' height='40' fill='%23D7CCC8'/></svg>" alt="جلسة الخيمة">
+                    </div>
+                    <div class="place-info">
+                        <h3>جلسة الخيمة</h3>
+                        <p>جلسة خارجية مميزة تطل على أجمل المناظر الطبيعية. المكان مناسب للعائلات والأصدقاء مع خدمة شواء ومشروبات ساخنة.</p>
+                        <div class="place-details">
+                            <div class="place-rating">
+                                <span>★★★★☆</span>
+                                <p>4.5</p>
+                            </div>
+                            <div class="place-location">
+                                <span>📍</span>
+                                <p>الطائف، القطيف الشمالي</p>
+                            </div>
+                        </div>
+                        <a href="#contact" class="place-button">استفسر أكثر</a>
+                    </div>
+                </div>
+
+                <div class="place-card">
+                    <div class="place-category">مطعم</div>
+                    <div class="place-image">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 350 250'><rect width='350' height='250' fill='%23E57373'/><rect x='30' y='100' width='290' height='150' fill='%23FFF59D'/><rect x='40' y='80' width='270' height='30' fill='%23FFE082'/><rect x='50' y='130' width='60' height='80' fill='%23AED581'/><rect x='145' y='130' width='60' height='80' fill='%23AED581'/><rect x='240' y='130' width='60' height='80' fill='%23AED581'/><circle cx='80' cy='170' r='20' fill='%23FFF'/><circle cx='175' cy='170' r='20' fill='%23FFF'/><circle cx='270' cy='170' r='20' fill='%23FFF'/><rect x='130' y='40' width='90' height='50' rx='10' fill='%23FFB74D'/></svg>" alt="مطعم اللمة">
+                    </div>
+                    <div class="place-info">
+                        <h3>مطعم اللمة</h3>
+                        <p>مطعم عائلي يقدم ألذ المأكولات الشعبية والعالمية. يتميز بجلسات مريحة وخدمة راقية، مثالي للمناسبات والتجمعات العائلية.</p>
+                        <div class="place-details">
+                            <div class="place-rating">
+                                <span>★★★★☆</span>
+                                <p>4.7</p>
+                            </div>
+                            <div class="place-location">
+                                <span>📍</span>
+                                <p>جدة، الروضة</p>
+                            </div>
+                        </div>
+                        <a href="#contact" class="place-button">استفسر أكثر</a>
+                    </div>
+                </div>
+
+                <div class="place-card">
+                    <div class="place-category">استراحة</div>
+                    <div class="place-image">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 350 250'><rect width='350' height='250' fill='%2390CAF9'/><rect x='0' y='150' width='350' height='100' fill='%2381C784'/><rect x='50' y='100' width='250' height='100' fill='%23FFCC80'/><polygon points='50,100 175,50 300,100' fill='%23A1887F'/><rect x='100' y='130' width='40' height='50' fill='%23BBDEFB'/><rect x='210' y='130' width='40' height='50' fill='%23BBDEFB'/><rect x='120' y='200' width='110' height='50' fill='%23E0E0E0'/><circle cx='250' cy='50' r='20' fill='%23FFF59D'/><path d='M130 50 Q 150 20, 170 50 Q 190 80, 210 50' fill='none' stroke='%23FFFFFF' stroke-width='3'/></svg>" alt="استراحة الفرحة">
+                    </div>
+                    <div class="place-info">
+                        <h3>استراحة الفرحة</h3>
+                        <p>استراحة فاخرة مجهزة بأحدث المرافق، تضم مسبح ومنطقة ألعاب للأطفال وجلسات خارجية وداخلية. مثالية للعائلات والمناسبات.</p>
+                        <div class="place-details">
+                            <div class="place-rating">
+                                <span>★★★★★</span>
+                                <p>4.9</p>
+                            </div>
+                            <div class="place-location">
+                                <span>📍</span>
+                                <p>الدمام، حي النخيل</p>
+                            </div>
+                        </div>
+                        <a href="#contact" class="place-button">استفسر أكثر</a>
+                    </div>
+                </div>
+
+                <div class="place-card">
+                    <div class="place-category">شاليه</div>
+                    <div class="place-image">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 350 250'><rect width='350' height='250' fill='%2382B1FF'/><rect x='0' y='170' width='350' height='80' fill='%2326A69A'/><rect x='70' y='90' width='210' height='110' fill='%23A1887F'/><polygon points='70,90 175,30 280,90' fill='%238D6E63'/><rect x='120' y='120' width='40' height='40' fill='%23BBDEFB'/><rect x='190' y='120' width='40' height='40' fill='%23BBDEFB'/><rect x='140' y='180' width='70' height='70' fill='%23BCAAA4'/><path d='M20 170 Q 35 155, 50 170 Q 65 185, 80 170 Q 95 155, 110 170 Q 125 185, 140 170' fill='%2329B6F6'/><circle cx='250' cy='50' r='20' fill='%23FFEE58'/><path d='M250 210 L 270 210 L 270 240 L 280 240 L 280 210 L 300 210 L 300 200 L 250 200 Z' fill='%23795548'/></svg>" alt="شاليه البحر">
+                    </div>
+                    <div class="place-info">
+                        <h3>شاليه البحر</h3>
+                        <p>شاليه فاخر على الواجهة البحرية مباشرة، يوفر إطلالات خلابة على البحر مع خصوصية تامة. يضم مسبح خاص ومرافق متكاملة.</p>
+                        <div class="place-details">
+                            <div class="place-rating">
+                                <span>★★★★☆</span>
+                                <p>4.6</p>
+                            </div>
+                            <div class="place-location">
+                                <span>📍</span>
+                                <p>الخبر، نصف القمر</p>
+                            </div>
+                        </div>
+                        <a href="#contact" class="place-button">استفسر أكثر</a>
+                    </div>
+                </div>
+
+                <div class="place-card">
+                    <div class="place-category">مقهى</div>
+                    <div class="place-image">
+                        <img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 350 250'><rect width='350' height='250' fill='%23EFEBE9'/><rect x='20' y='80' width='310' height='150' fill='%23D7CCC8'/><rect x='40' y='110' width='270' height='90' fill='%23BCAAA4'/><rect x='60' y='60' width='40' height='30' fill='%23A1887F'/><rect x='150' y='60' width='50' height='30' fill='%23A1887F'/><rect x='250' y='60' width='40' height='30' fill='%23A1887F'/><circle cx='80' cy='150' r='20' fill='%23FFCC80'/><circle cx='175' cy='150' r='20' fill='%23FFCC80'/><circle cx='270' cy='150' r='20' fill='%23FFCC80'/><path d='M50 210 L 300 210 L 300 220 L 50 220 Z' fill='%238D6E63'/></svg>" alt="مقهى الاسترخاء">
+                    </div>
+                    <div class="place-info">
+                        <h3>مقهى الاسترخاء</h3>
+                        <p>مقهى يتميز بتصميم عصري مريح وأجواء مثالية للعمل أو القراءة. يقدم تشكيلة مميزة من المشروبات الساخنة والحلويات اللذيذة.</p>
+                        <div class="place-details">
+                            <div class="place-rating">
+                                <span>★★★★☆</span>
+                                <p>4.4</p>
+                            </div>
+                            <div class="place-location">
+                                <span>📍</span>
+                                <p>الرياض، حي المحمدية</p>
+                            </div>
+                        </div>
+                        <a href="#contact" class="place-button">استفسر أكثر</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <section id="team">
+    <div class="container" style="text-align: center;">
+        <h2>فريق قعدتنا</h2>
+        <div class="team" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem;">
+            <!-- عضو الفريق الأول -->
+            <div class="team-member" style="max-width: 300px;">
+                <img src="pic3.png" alt="فيصل المرشد"
+                     style="width: 50%; max-width: 200px; height: 200px; object-fit: cover; object-position: top; border-radius: 50%; margin-bottom: 1rem; background-color: #f0f0f0;">
+                <div class="team-member-info">
+                    <h3>نايف العتيبي</h3>
+                    <h4>مؤسس "قعدتنا"</h4>
+                    <p>مؤسس "قعدتنا" وشغوف بالأماكن الهادية والقعدات المميزة. أسس المشروع عشان يوفر تجربة طلعة سهلة، بدون حيرة ودوخة البحث.</p>
+                </div>
+            </div>
+
+            <div class="team-member" style="max-width: 300px;">
+                <img src="pic2.png" alt="فيصل المرشد"
+                     style="width: 50%; max-width: 200px; height: 200px; object-fit: cover; object-position: top; border-radius: 50%; margin-bottom: 1rem; background-color: #f0f0f0;">
+                <div class="team-member-info">
+                    <h3>فهد القوفي</h3>
+                    <h4> الرئيس التنفيذي (CEO)</h4>
+                    <p> يقود التخطيط الاستراتيجي ويحدد أهداف الشركة لضمان نمو مستدام ونجاح طويل الأمد.</p>
+                </div>
+            </div>
+
+            <!-- عضو الفريق الثاني -->
+            <div class="team-member" style="max-width: 300px;">
+                <img src="pic1.png" alt="فيصل المرشد"
+                     style="width: 50%; max-width: 200px; height: 200px; object-fit: cover; object-position: top; border-radius: 50%; margin-bottom: 1rem; background-color: #f0f0f0;">
+                <div class="team-member-info">
+                    <h3>فيصل المرشد</h3>
+                    <h4>مسؤول التنسيق والتوصيات</h4>
+                    <p>يبحث ويتابع أحدث الأماكن وأكثرها تميز، وينسّق التجربة داخل الموقع. شغفه اكتشاف الجديد ومشاركة أفضل الأجواء.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>تواصل معنا</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <p>عندك استفسار؟ تبغى توصية مخصصة لك؟</p>
+                    <p>عبي النموذج التالي، وراح نرد عليك خلال وقت قصير:</p>
+                    <a href="https://wa.me/?text=أبغى استفسر عن قعدتنا" class="whatsapp-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#fff">
+                            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.677.116-.173.231-.145.39-.087s1.011.477 1.184.564c.173.087.288.131.332.202.043.72.043.433-.101.593z"/>
+                        </svg>
+                        تواصل عبر واتساب
+                    </a>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm" action="#" method="POST">
+                        <div class="form-group">
+                            <label for="name">الاسم</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">البريد الإلكتروني</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">المدينة</label>
+                            <select id="city" name="city" required>
+                                <option value="">اختر المدينة</option>
+                                <option value="riyadh">الرياض</option>
+                                <option value="jeddah">جدة</option>
+                                <option value="dammam">الدمام</option>
+                                <option value="khobar">الخبر</option>
+                                <option value="makkah">مكة المكرمة</option>
+                                <option value="madinah">المدينة المنورة</option>
+                                <option value="other">مدينة أخرى</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">الرسالة / الطلب</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit">إرسال</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>جميع الحقوق محفوظة &copy; قعدتنا 2025</p>
+        </div>
+    </footer>
+
+    <script>
+        // تفعيل القائمة للشاشات الصغيرة
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+        
+        // إرسال نموذج الاتصال
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const city = document.getElementById('city').value;
+            const message = document.getElementById('message').value;
+            
+            // هنا يمكن إضافة كود الإرسال الفعلي للبريد الإلكتروني
+            // حالياً سنعرض رسالة نجاح فقط
+            
+            alert('تم استلام رسالتك بنجاح! سنتواصل معك قريباً.');
+            this.reset();
+        });
+        
+        // التمرير السلس عند النقر على روابط القائمة
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                    
+                    // إغلاق القائمة في الشاشات الصغيرة
+                    const navLinks = document.getElementById('navLinks');
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
